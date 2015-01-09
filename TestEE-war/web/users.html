@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2015 Nisheeth Shah
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-->
+<html>
+    <head>
+        <title>Users</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="scripts/plugin/metro/css/metro-bootstrap.css">
+        <link rel="stylesheet" href="scripts/plugin/metro/min/iconFont.min.css">
+        <link rel="stylesheet" href="scripts/plugin/metro/less/pagination.less" type="text/css"/>
+        <link rel="stylesheet" href="scripts/plugin/metro/less/pagination.less" type="text/css">
+        <style>
+            .container{
+                width: 1100px;
+            }
+        </style>
+        <script src="scripts/plugin/jquery.min.js"></script>
+        <script src="scripts/plugin/jquery-ui.min.js"></script>
+        <script src="scripts/plugin/metro/js/metro.min.js"></script>
+        <script src="scripts/plugin/metro/js/metro-table.js"></script>
+        <script src="scripts/plugin/metro/js/metro-button-set.js"></script>
+        <script src="scripts/commonfunctions.js"></script>
+        <script>
+            $(function () {
+                Application.callAJAX({
+                    url: Application.Controller.CENTRAL_CONTROLLER,
+                    type: "POST",
+                    data: {dsid: 2, start: 0, end: 9},
+                    success: function (data) {
+                        console.log(data);
+                        Application.createTable("tablediv", data, ["Sr", "Request URL", "Remote Address", "User Agent", "Remote Host Name", "Request Time"], true, 2);
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body class="metro">
+        <div class="container">
+            <div class="grid">
+                <div class="row">
+                    <div class="span12">
+                        <div id="tablediv">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
